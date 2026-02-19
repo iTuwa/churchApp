@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Home · Church App{% endblock %}
+{% block content %}
+<div class="space-y-4" id="home-root"
+     data-latest-devotional="{% if devotional %}{{ devotional.for_date.isoformat() }}{% endif %}"
+     data-latest-event="{% if next_event %}{{ next_event.event_date.isoformat() }}{% endif %}"
+     data-latest-announcement="{% if announcements %}{{ announcements[0].created_at.isoformat() }}{% endif %}">
+    <header class="space-y-1">
+        <div class="flex items-center justify-between gap-3">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Welcome</p>
+                <h1 class="text-2xl font-semibold text-slate-900">Church Companion</h1>
+            </div>
+            <a href="{{ url_for('admin.login') }}" class="inline-flex items-center px-3 py-1.5 rounded-full border border-indigo-200 text-[11px] font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 transition">
+                Admin
+            </a>
+        </div>
+        <p class="text-sm text-slate-500">Stay rooted in worship, the Word, and community wherever you are.</p>
+    </header>
+
+    <section class="space-y-3">
+        <a href="{{ url_for('worship.worship_home') }}" class="flex items-center gap-3 rounded-2xl bg-white shadow-md border border-slate-100 px-3 py-3 hover:border-indigo-200 hover:shadow-lg transition">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=400&q=80" alt="Worship" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1">
+                <p class="text-[11px] font-semibold text-slate-400 tracking-[0.18em] uppercase">Worship</p>
+                <p class="text-sm font-semibold text-slate-900">Confession &amp; Faith</p>
+                <p class="text-xs text-slate-500">Access General Confession, Affirmation, hymns and more.</p>
+            </div>
+            <span class="text-slate-300 text-lg">›</span>
+        </a>
+
+        <a href="{{ url_for('devotional.today_devotional') }}" class="flex items-center gap-3 rounded-2xl bg-white shadow-md border border-slate-100 px-3 py-3 hover:border-indigo-200 hover:shadow-lg transition">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=400&q=80" alt="Devotional" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1">
+                <p class="text-[11px] font-semibold text-slate-400 tracking-[0.18em] uppercase">Today</p>
+                <p class="text-sm font-semibold text-slate-900">Todays Devotional</p>
+                <p class="text-xs text-slate-500">Scripture, reflection, and prayer for the day.</p>
+            </div>
+            <span class="text-slate-300 text-lg">›</span>
+        </a>
+
+        <a href="{{ url_for('events.calendar') }}" class="flex items-center gap-3 rounded-2xl bg-white shadow-md border border-slate-100 px-3 py-3 hover:border-indigo-200 hover:shadow-lg transition">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <img src="https://images.unsplash.com/photo-1542317854-10c28b62716f?auto=format&fit=crop&w=400&q=80" alt="Events" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1">
+                <p class="text-[11px] font-semibold text-slate-400 tracking-[0.18em] uppercase">Events</p>
+                <p class="text-sm font-semibold text-slate-900">Upcoming Services</p>
+                <p class="text-xs text-slate-500">See whats happening this week.</p>
+            </div>
+            <span class="text-slate-300 text-lg">›</span>
+        </a>
+
+        <a href="{{ url_for('devotional.prayer_notes') }}" class="flex items-center gap-3 rounded-2xl bg-white shadow-md border border-slate-100 px-3 py-3 hover:border-indigo-200 hover:shadow-lg transition">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=400&q=80" alt="Prayer notes" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1">
+                <p class="text-[11px] font-semibold text-slate-400 tracking-[0.18em] uppercase">Personal</p>
+                <p class="text-sm font-semibold text-slate-900">Prayer Notes</p>
+                <p class="text-xs text-slate-500">Capture what God is saying to you.</p>
+            </div>
+            <span class="text-slate-300 text-lg">›</span>
+        </a>
+    </section>
+
+    {% if devotional %}
+    <section class="rounded-2xl bg-white shadow-md border border-slate-100 p-4 space-y-2">
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-slate-900 text-base">Todays Devotional</h2>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">{{ devotional.for_date.strftime('%b %d') }}</span>
+        </div>
+        <p class="text-sm font-medium text-slate-800">{{ devotional.title }}</p>
+        {% if devotional.reading_reference %}
+        <p class="text-xs text-slate-500">{{ devotional.reading_reference }}</p>
+        {% endif %}
+        <p class="text-sm text-slate-600 line-clamp-3">{{ devotional.content }}</p>
+        <a href="{{ url_for('devotional.today_devotional') }}" class="inline-flex items-center text-xs font-medium text-emerald-700 mt-1">Open full</a>
+    </section>
+    {% endif %}
+
+    {% if next_event %}
+    <section class="rounded-2xl bg-white shadow-md border border-slate-100 p-4 space-y-2">
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-slate-900 text-base">Next Event</h2>
+            <span class="text-[11px] px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700">{{ next_event.event_date.strftime('%b %d') }}</span>
+        </div>
+        <p class="text-sm font-medium text-slate-800">{{ next_event.title }}</p>
+        <p class="text-sm text-slate-600">{{ next_event.description }}</p>
+    </section>
+    {% endif %}
+
+    {% if announcements %}
+    <section class="space-y-2">
+        <div class="flex items-center justify-between">
+            <h2 class="text-sm font-semibold text-slate-900">Announcements</h2>
+        </div>
+        <div class="space-y-2">
+            {% for a in announcements %}
+            <article class="rounded-2xl bg-white shadow-sm border border-slate-100 p-3">
+                <h3 class="text-sm font-semibold text-slate-900">{{ a.title }}</h3>
+                <p class="text-xs text-slate-600">{{ a.body }}</p>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}

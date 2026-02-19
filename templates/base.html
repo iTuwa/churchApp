@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Church App{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+        .bottom-nav {
+            box-shadow: 0 -4px 12px rgba(15, 23, 42, 0.08);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-slate-900 bg-slate-100">
+    {% if request.endpoint == 'main.home' %}
+    <!-- Splash screen overlay (home only) -->
+    <div id="splash-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white text-slate-900 transition-opacity duration-700">
+        <div class="flex flex-col items-center space-y-3">
+            <div class="w-40 h-40 flex items-center justify-center">
+                <img src="{{ url_for('static', filename='img/church-logo.png') }}" alt="Church logo" class="w-40 h-40 object-contain" />
+            </div>
+            <div class="text-center space-y-0.5">
+                <p class="text-xs tracking-[0.2em] uppercase text-slate-500">Southern Conference of the</p>
+                <p class="text-xs tracking-[0.2em] uppercase text-slate-500">United Methodist Church</p>
+                <p class="text-sm font-semibold text-slate-900">Mile Six Charge</p>
+                <p class="text-[11px] text-slate-500">Preparing your worship experience...</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Page loading overlay for navigation -->
+    <div id="page-loading" class="fixed inset-0 z-40 flex items-center justify-center bg-white/80 text-slate-700 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div class="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+    <main class="flex-1 pb-16 flex">
+        <div class="max-w-md w-full mx-auto my-2 rounded-3xl bg-white shadow-xl overflow-hidden flex flex-col">
+            <header class="h-12 px-4 flex items-center justify-between bg-indigo-600 text-white text-sm font-medium">
+                <span>Community Church</span>
+                <span class="material-icons text-lg">home</span>
+            </header>
+            <div class="px-4 pt-4 pb-6">
+            {% set current_endpoint = request.endpoint or '' %}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="space-y-2 mb-4">
+                        {% for m in messages %}
+                            <div class="text-sm rounded-lg bg-emerald-50 text-emerald-800 px-3 py-2 shadow-sm">{{ m }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav fixed bottom-0 inset-x-0 bg-slate-100/95 backdrop-blur border-t border-slate-200 z-40">
+        <div class="max-w-md mx-auto flex justify-between px-3 py-1.5 text-[11px] text-slate-600">
+            <a href="{{ url_for('main.home') }}" class="flex-1 flex justify-center">
+                <div class="inline-flex items-center justify-center w-11 h-11 rounded-full shadow-md text-base transition {% if current_endpoint.startswith('main.') %}bg-indigo-600 text-white hover:bg-indigo-700{% else %}bg-white text-slate-700 hover:bg-slate-100{% endif %}">
+                    <span class="material-icons text-[20px] leading-none">home</span>
+                </div>
+            </a>
+            <a href="{{ url_for('worship.worship_home') }}" class="flex-1 flex justify-center">
+                <div class="inline-flex items-center justify-center w-11 h-11 rounded-full shadow-sm text-base transition {% if current_endpoint.startswith('worship.') %}bg-indigo-600 text-white hover:bg-indigo-700{% else %}bg-white text-slate-700 hover:bg-slate-100{% endif %}">
+                    <span class="material-icons text-[20px] leading-none">church</span>
+                </div>
+            </a>
+            <a href="{{ url_for('devotional.today_devotional') }}" class="flex-1 flex justify-center">
+                <div class="inline-flex items-center justify-center w-11 h-11 rounded-full shadow-sm text-base transition {% if current_endpoint.startswith('devotional.') %}bg-indigo-600 text-white hover:bg-indigo-700{% else %}bg-white text-slate-700 hover:bg-slate-100{% endif %}">
+                    <span class="material-icons text-[20px] leading-none">menu_book</span>
+                </div>
+            </a>
+            <a href="{{ url_for('community.suggestions') }}" class="flex-1 flex justify-center">
+                <div class="inline-flex items-center justify-center w-11 h-11 rounded-full shadow-sm text-base transition {% if current_endpoint.startswith('community.') %}bg-indigo-600 text-white hover:bg-indigo-700{% else %}bg-white text-slate-700 hover:bg-slate-100{% endif %}">
+                    <span class="material-icons text-[20px] leading-none">forum</span>
+                </div>
+            </a>
+            <a href="{{ url_for('events.calendar') }}" class="flex-1 flex justify-center">
+                <div class="inline-flex items-center justify-center w-11 h-11 rounded-full shadow-sm text-base transition {% if current_endpoint.startswith('events.') %}bg-indigo-600 text-white hover:bg-indigo-700{% else %}bg-white text-slate-700 hover:bg-slate-100{% endif %}">
+                    <span class="material-icons text-[20px] leading-none">event</span>
+                </div>
+            </a>
+            <a href="{{ url_for('giving.giving_home') }}" class="flex-1 flex justify-center">
+                <div class="inline-flex items-center justify-center w-11 h-11 rounded-full shadow-sm text-base transition {% if current_endpoint.startswith('giving.') %}bg-indigo-600 text-white hover:bg-indigo-700{% else %}bg-white text-slate-700 hover:bg-slate-100{% endif %}">
+                    <span class="material-icons text-[20px] leading-none">volunteer_activism</span>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
