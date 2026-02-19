@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date
@@ -88,4 +90,6 @@ app = create_app()
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # For local/dev runs; on Render you should use gunicorn "app:create_app()"
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
