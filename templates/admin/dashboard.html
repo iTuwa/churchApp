@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-2 flex items-center justify-between">
+        <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Admin</p>
+            <h1 class="text-xl font-semibold text-slate-900">Dashboard</h1>
+        </div>
+        <a href="{{ url_for('admin.logout') }}" class="text-xs text-slate-500">Logout</a>
+    </header>
+
+    <section class="grid grid-cols-2 gap-3">
+        <a href="{{ url_for('admin.manage_devotionals') }}" class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3 text-sm font-medium text-slate-900">Devotionals</a>
+        <a href="{{ url_for('admin.manage_events') }}" class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3 text-sm font-medium text-slate-900">Events</a>
+        <a href="{{ url_for('admin.manage_announcements') }}" class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3 text-sm font-medium text-slate-900">Announcements</a>
+    </section>
+
+    <section class="space-y-2">
+        <div class="flex items-center justify-between">
+            <h2 class="text-sm font-semibold text-slate-900">Latest Suggestions</h2>
+            <a href="{{ url_for('admin.view_suggestions') }}" class="text-[11px] text-indigo-600">View all</a>
+        </div>
+        <div class="space-y-2">
+            {% for s in suggestions %}
+            <article class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3">
+                <p class="text-xs text-slate-700">{{ s.content }}</p>
+                <p class="text-[11px] text-slate-400 mt-1">
+                    {% if s.is_anonymous %}Anonymous{% else %}{{ s.contact or 'No contact' }}{% endif %}
+                </p>
+            </article>
+            {% else %}
+            <p class="text-xs text-slate-500">No suggestions yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="space-y-2">
+        <h2 class="text-sm font-semibold text-slate-900">Pending Testimonies</h2>
+        <div class="space-y-2">
+            {% for t in pending_testimonies %}
+            <article class="rounded-2xl bg-white border border-slate-100 shadow-sm p-3 space-y-1">
+                <p class="text-xs text-slate-700">{{ t.content }}</p>
+                <p class="text-[11px] text-slate-400">— {{ t.name or 'Anonymous' }}</p>
+                <form method="post" action="{{ url_for('admin.approve_testimony', testimony_id=t.id) }}">
+                    <button type="submit" class="inline-flex items-center px-2 py-1 mt-1 rounded-lg bg-emerald-600 text-white text-[11px] font-medium">Approve</button>
+                </form>
+            </article>
+            {% else %}
+            <p class="text-xs text-slate-500">No pending testimonies.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
