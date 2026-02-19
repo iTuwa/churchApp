@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Suggestion Box{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Community</p>
+        <h1 class="text-xl font-semibold text-slate-900">Suggestion Box</h1>
+        <p class="text-sm text-slate-500">Share ideas, feedback, or concerns. You can remain anonymous.</p>
+    </header>
+
+    <form method="post" class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-3">
+        <textarea name="content" required class="w-full min-h-[140px] text-sm rounded-xl border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/70" placeholder="Your suggestion..."></textarea>
+        <div class="flex items-center justify-between gap-3 text-xs text-slate-600">
+            <label class="inline-flex items-center gap-2">
+                <input type="checkbox" name="anonymous" class="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500" checked>
+                <span>Send anonymously</span>
+            </label>
+            <input type="text" name="contact" class="flex-1 rounded-lg border border-slate-200 px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-emerald-500/70" placeholder="Contact (optional)" />
+        </div>
+        <button type="submit" class="w-full inline-flex items-center justify-center px-3 py-2 rounded-xl bg-slate-900 text-white text-sm font-medium shadow-sm">Submit</button>
+    </form>
+</div>
+{% endblock %}

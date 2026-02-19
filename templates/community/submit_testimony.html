@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Share Testimony{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Community</p>
+        <h1 class="text-xl font-semibold text-slate-900">Share Your Testimony</h1>
+        <p class="text-sm text-slate-500">Your story will be reviewed before it is shared publicly.</p>
+    </header>
+
+    <form method="post" class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-3">
+        <input type="text" name="name" class="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/70" placeholder="Your name (optional)" />
+        <textarea name="content" required class="w-full min-h-[160px] text-sm rounded-xl border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/70" placeholder="Your testimony..."></textarea>
+        <button type="submit" class="w-full inline-flex items-center justify-center px-3 py-2 rounded-xl bg-slate-900 text-white text-sm font-medium shadow-sm">Submit Testimony</button>
+    </form>
+</div>
+{% endblock %}

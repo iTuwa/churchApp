@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Testimonies{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Community</p>
+        <div class="flex items-center justify-between gap-2">
+            <h1 class="text-xl font-semibold text-slate-900">Testimonies</h1>
+            <a href="{{ url_for('community.submit_testimony') }}" class="inline-flex items-center text-xs font-medium text-emerald-700">Share</a>
+        </div>
+        <p class="text-sm text-slate-500">Stories of Gods faithfulness.</p>
+    </header>
+
+    <section class="space-y-3">
+        {% for t in testimonies %}
+        <article class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-1">
+            <p class="text-sm text-slate-700 leading-relaxed">{{ t.content }}</p>
+            <p class="text-xs text-slate-400 mt-1">— {{ t.name or 'Anonymous' }}</p>
+        </article>
+        {% else %}
+        <p class="text-sm text-slate-600">No testimonies are published yet.</p>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}
