@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Hymns · Worship{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Worship</p>
+        <h1 class="text-xl font-semibold text-slate-900">Hymns</h1>
+        <p class="text-sm text-slate-500">Text-based hymns for singing along in service or at home.</p>
+    </header>
+
+    <section class="space-y-3">
+        {% for hymn in hymns %}
+        <article class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-2">
+            <h2 class="text-sm font-semibold text-slate-900">{{ hymn.title }}</h2>
+            <pre class="text-sm leading-relaxed text-slate-700 whitespace-pre-wrap">{{ hymn.lyrics }}</pre>
+        </article>
+        {% else %}
+        <p class="text-sm text-slate-600">Hymns will be added soon.</p>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

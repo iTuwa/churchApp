@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Order of Service · Worship{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Worship</p>
+        <h1 class="text-xl font-semibold text-slate-900">Order of Service</h1>
+        <p class="text-sm text-slate-500">Follow the flow of todays gathering.</p>
+    </header>
+
+    <section class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-3">
+        {% if order %}
+            <h2 class="text-sm font-semibold text-slate-900 mb-2">{{ order.name }}</h2>
+            <ol class="space-y-1 text-sm text-slate-700 list-decimal list-inside">
+                {% for item in items %}
+                    <li class="py-1 rounded-lg">{{ item }}</li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <p class="text-sm text-slate-600">The order of service will be available soon.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

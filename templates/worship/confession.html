@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}General Confession · Worship{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Worship</p>
+        <h1 class="text-xl font-semibold text-slate-900">General Confession</h1>
+        <p class="text-sm text-slate-500">Pray slowly, attentively, and from the heart.</p>
+    </header>
+
+    <section class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-3">
+        <p id="confession-text" class="text-sm leading-relaxed text-slate-800">
+            Almighty and most merciful Father, we have erred and strayed from your ways like lost sheep.
+            We have followed too much the devices and desires of our own hearts. We have offended against your holy laws.
+            We have left undone those things which we ought to have done; and we have done those things which we ought not to have done.
+            But you, O Lord, have mercy upon us. Spare those who confess their faults. Restore those who are penitent, according to your promises declared to mankind in Christ Jesus our Lord.
+            And grant, O most merciful Father, for his sake, that we may live a disciplined, righteous, and godly life, to the glory of your holy Name. Amen.
+        </p>
+    </section>
+
+    <!-- Floating play button for read-aloud -->
+    <button type="button"
+            class="fixed bottom-20 right-6 inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-600 text-white text-2xl shadow-xl hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            onclick="speakText('confession-text')">
+        ▶
+    </button>
+</div>
+{% endblock %}

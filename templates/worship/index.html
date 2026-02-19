@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Worship{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Worship</p>
+        <h1 class="text-xl font-semibold text-slate-900">Worship Resources</h1>
+        <p class="text-sm text-slate-500">Pray, confess, and affirm the faith wherever you are.</p>
+    </header>
+
+    <section class="space-y-3">
+        <a href="{{ url_for('worship.confession') }}" class="flex items-center gap-3 rounded-2xl bg-white shadow-md border border-slate-100 px-3 py-3 hover:border-indigo-200 hover:shadow-lg transition">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <span>📖</span>
+            </div>
+            <div class="flex-1">
+                <p class="text-[11px] font-semibold text-slate-400 tracking-[0.18em] uppercase">Prayer</p>
+                <p class="text-sm font-semibold text-slate-900">General Confession</p>
+                <p class="text-xs text-slate-500">A shared prayer of repentance for corporate worship.</p>
+            </div>
+            <span class="text-slate-300 text-lg">›</span>
+        </a>
+
+        <a href="{{ url_for('worship.affirmation') }}" class="flex items-center gap-3 rounded-2xl bg-white shadow-md border border-slate-100 px-3 py-3 hover:border-indigo-200 hover:shadow-lg transition">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <span>✝</span>
+            </div>
+            <div class="flex-1">
+                <p class="text-[11px] font-semibold text-slate-400 tracking-[0.18em] uppercase">Faith</p>
+                <p class="text-sm font-semibold text-slate-900">Affirmation of Faith</p>
+                <p class="text-xs text-slate-500">Confess the core beliefs of the Church together.</p>
+            </div>
+            <span class="text-slate-300 text-lg">›</span>
+        </a>
+
+        <a href="{{ url_for('worship.order_of_service') }}" class="flex items-center gap-3 rounded-2xl bg-white shadow-md border border-slate-100 px-3 py-3 hover:border-indigo-200 hover:shadow-lg transition">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <span>🕊</span>
+            </div>
+            <div class="flex-1">
+                <p class="text-[11px] font-semibold text-slate-400 tracking-[0.18em] uppercase">Service</p>
+                <p class="text-sm font-semibold text-slate-900">Order of Service</p>
+                <p class="text-xs text-slate-500">Follow the structure of the worship gathering.</p>
+            </div>
+            <span class="text-slate-300 text-lg">›</span>
+        </a>
+
+        <a href="{{ url_for('worship.hymns') }}" class="flex items-center gap-3 rounded-2xl bg-white shadow-md border border-slate-100 px-3 py-3 hover:border-indigo-200 hover:shadow-lg transition">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden bg-indigo-50 flex items-center justify-center text-indigo-600">
+                <span>🎵</span>
+            </div>
+            <div class="flex-1">
+                <p class="text-[11px] font-semibold text-slate-400 tracking-[0.18em] uppercase">Music</p>
+                <p class="text-sm font-semibold text-slate-900">Hymns</p>
+                <p class="text-xs text-slate-500">Sing along with text-based hymns.</p>
+            </div>
+            <span class="text-slate-300 text-lg">›</span>
+        </a>
+    </section>
+</div>
+{% endblock %}
