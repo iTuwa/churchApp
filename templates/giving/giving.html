@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Giving{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Giving</p>
+        <h1 class="text-xl font-semibold text-slate-900">Giving & Support</h1>
+        <p class="text-sm text-slate-500">Thank you for partnering with the work of the church.</p>
+    </header>
+
+    <section class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-2">
+        <h2 class="text-sm font-semibold text-slate-900">Bank Transfer Details</h2>
+        <p class="text-sm text-slate-700">
+            <span class="font-medium">Account Name:</span> Your Church Name<br>
+            <span class="font-medium">Bank:</span> Your Bank Name<br>
+            <span class="font-medium">Account Number:</span> 0000000000<br>
+            <span class="font-medium">Reference:</span> Offering / Tithe / Special
+        </p>
+    </section>
+
+    <section class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-3">
+        <h2 class="text-sm font-semibold text-slate-900">Upload Proof (Optional)</h2>
+        <p class="text-xs text-slate-500">For now this is just a visual element; file uploads are not stored.</p>
+        <label class="flex flex-col items-center justify-center h-28 border-2 border-dashed border-slate-200 rounded-xl text-xs text-slate-500 cursor-pointer hover:border-emerald-400 hover:text-emerald-700 transition">
+            <span class="material-icons text-xl mb-1">cloud_upload</span>
+            <span>Select screenshot or receipt</span>
+            <input type="file" class="hidden" />
+        </label>
+    </section>
+</div>
+{% endblock %}
