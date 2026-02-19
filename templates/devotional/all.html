@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Devotionals Archive{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Devotional</p>
+        <h1 class="text-xl font-semibold text-slate-900">Devotionals</h1>
+        <p class="text-sm text-slate-500">Browse past devotionals.</p>
+    </header>
+
+    <section class="space-y-3">
+        {% for d in devotionals %}
+        <article class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-1">
+            <div class="flex items-center justify-between gap-2">
+                <div>
+                    <h2 class="text-sm font-semibold text-slate-900">{{ d.title }}</h2>
+                    <p class="text-xs text-slate-500">{{ d.for_date.strftime('%b %d, %Y') }}{% if d.reading_reference %} · {{ d.reading_reference }}{% endif %}</p>
+                </div>
+            </div>
+            <p class="text-sm text-slate-700 line-clamp-3">{{ d.content }}</p>
+        </article>
+        {% else %}
+        <p class="text-sm text-slate-600">No devotionals have been added yet.</p>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

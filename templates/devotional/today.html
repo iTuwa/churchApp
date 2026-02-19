@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Todays Devotional{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Devotional</p>
+        <h1 class="text-xl font-semibold text-slate-900">Todays Devotional</h1>
+        <p class="text-xs text-slate-500">{{ today.strftime('%A, %d %B %Y') }}</p>
+    </header>
+
+    {% if devotional %}
+    <article class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-3">
+        <div class="flex items-center justify-between gap-2">
+            <div>
+                <h2 class="text-base font-semibold text-slate-900">{{ devotional.title }}</h2>
+                {% if devotional.reading_reference %}
+                <p class="text-xs text-slate-500">{{ devotional.reading_reference }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <p class="text-sm leading-relaxed text-slate-800 whitespace-pre-line">{{ devotional.content }}</p>
+    </article>
+    {% else %}
+    <p class="text-sm text-slate-600">No devotional has been posted for today yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

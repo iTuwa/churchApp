@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Prayer Notes{% endblock %}
+{% block content %}
+<div class="space-y-4">
+    <header class="space-y-1">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Devotional</p>
+        <h1 class="text-xl font-semibold text-slate-900">Prayer Notes</h1>
+        <p class="text-sm text-slate-500">Your personal, private space. Stored only in this browser.</p>
+    </header>
+
+    <section class="rounded-2xl bg-white border border-slate-100 shadow-sm p-4 space-y-3">
+        <textarea id="prayer-notes" class="w-full min-h-[200px] text-sm leading-relaxed text-slate-800 rounded-xl border border-slate-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500/70"
+                  placeholder="Write your prayers, reflections, and what God is saying to you..."></textarea>
+        <p class="text-[11px] text-slate-400" id="prayer-notes-status">Saved locally.</p>
+    </section>
+</div>
+{% endblock %}
